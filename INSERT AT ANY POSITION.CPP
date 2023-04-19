@@ -18,9 +18,16 @@ void insertAThead(Node* &head,int d)
     ///newly added temp ta ager head ke point korbe ba newly added temp er next e head thakbe
     head=temp;///new head hbe newly added temp ta
 }
-void insertATposition(Node* &head,int position,int value)
+//////////////////////////////////////////////////   INSERT AT TAIL  ////////////////////////////////////////
+void insertATtail(Node* &tail,int d)
 {
-    if(position==1)///mane starting position e amra add korbo tie position ==1 mane jeta asole head e add korar sman
+    Node* temp=new Node(d);
+    tail->next=temp;///mane seshe  e add kora temp er address kintu ager tail e thakbe
+    tail=temp;///mane nton tail hbe temp ta ba tail take update korlam
+}
+void insertATposition(Node*&tail,Node* &head,int position,int value)
+{
+   if(position==1)///mane starting position e amra add korbo tie position ==1 mane jeta asole head e add korar sman
     {
         insertAThead(head,value);///mane amra head e value take patabo
         return;///mane 1 no e dukar por ba jdi 1 no position e add kori tahole erpor return kore dibo insertATposition e
@@ -32,6 +39,15 @@ void insertATposition(Node* &head,int position,int value)
         temp=temp->next;
         cnt++;
     }
+    //////////////////////////////////////////////// Tail Updation /////////////////////////////////////////
+
+    //////////////////////////////////////////////////inserting in the last position
+    if(temp->next==NULL)///mane temp traverse korte korte last er khali location ta bujabe
+    ///muloto linked list er bahirer mane last er pore add korte hole then seta
+     {
+         insertATtail(tail,value);
+         return ;
+     }
     ////creating a new node which data in inserted
     Node *nodeToinsert=new Node(value);
     nodeToinsert->next=temp->next;
@@ -74,7 +90,10 @@ int main()
     cout<<"Insert the value : "<<endl;
     cin>>v;
     ///p means position and v means value
-    insertATposition(head,p,v);///mane holo ami current  head ke patalam and 4 tmo position e 22 ke patalam
+    insertATposition(tail,head,p,v);///mane holo ami current tail and head ke patalam and 4 tmo position e 22 ke patalam
     print(head);
+
+    cout<<" Head data is:  "<<head->data<<endl;///printing the head value
+    cout<<"Tail data is:      "<<tail->data<<endl;///printing the tail value
 }
 
